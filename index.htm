@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misi Pintar Ceria: Pengembaraan Bintang Khas</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Fredoka & Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            nunito: ['Nunito', 'sans-serif'],
+          },
+          colors: {
+            bearYellow: '#FEE440',
+            bearPink: '#FF99C8',
+            bearBlue: '#CFBAF5',
+            bearGreen: '#A3C4F3',
+            bearOrange: '#FFD166',
+            bearDark: '#2B2D42'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #F4F6F8;
+      user-select: none;
+    }
+    .font-heading {
+      font-family: 'Fredoka', sans-serif;
+    }
+    .btn-bounce {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-bounce:active {
+      transform: scale(0.93);
+    }
+    @keyframes floatAnimation {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: floatAnimation 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-amber-50 via-sky-50 to-pink-50 min-h-screen text-slate-800 pb-12">
+
+  <!-- TOP BAR -->
+  <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
+        <div class="w-12 h-12 bg-amber-200 rounded-2xl flex items-center justify-center text-3xl shadow-sm border-2 border-amber-300 animate-float">
+          🧸
+        </div>
+        <div>
+          <h1 class="font-heading font-bold text-lg md:text-xl text-slate-800 leading-tight">Misi Pintar Ceria</h1>
+          <p class="text-xs text-slate-500 font-bold">Pendidikan Khas • Usia 6 Tahun</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2">
+        <button id="soundToggle" onclick="toggleSound()" class="p-3 rounded-2xl bg-amber-100 hover:bg-amber-200 text-amber-800 transition text-lg">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button onclick="goHome()" class="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition text-sm font-bold flex items-center gap-1">
+          <i class="fas fa-home"></i> <span class="hidden sm:inline">Utama</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-3xl mx-auto px-4 pt-6">
+
+    <!-- SCREEN 1: MENU UTAMA -->
+    <section id="homeScreen" class="space-y-6">
+      <!-- BANNER UTAMA -->
+      <div class="bg-gradient-to-r from-amber-300 via-pink-300 to-sky-300 rounded-3xl p-6 md:p-8 text-slate-900 shadow-lg relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center justify-between">
+        <div class="relative z-10 max-w-md">
+          <span class="bg-white/60 text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Seronok & Santai</span>
+          <h2 class="font-heading text-3xl md:text-4xl font-bold mt-2 leading-tight">Jom Belajar Bersama Cikgu Beruang! 🐻✨</h2>
+          <p class="mt-2 text-slate-700 text-sm md:text-base font-semibold">Pilih latihan visual yang menyeronokkan untuk mengenali warna, bentuk, emosi, dan nombor asas.</p>
+        </div>
+        <div class="text-7xl md:text-8xl mt-4 md:mt-0 animate-float select-none">
+          ⭐
+        </div>
+      </div>
+
+      <!-- PILIH AKTIVITI / TOPIK -->
+      <div>
+        <h3 class="font-heading text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+          <i class="fas fa-shapes text-pink-500"></i> Pilih Aktiviti Permainan
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- WARNA & OBJEK -->
+          <div onclick="startCategory('warna')" class="bg-white rounded-3xl p-5 shadow-md hover:shadow-xl border-4 border-pink-100 hover:border-pink-400 cursor-pointer transition transform hover:-translate-y-1 flex items-center gap-4 btn-bounce">
+            <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+              🎨
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-lg text-slate-800">Kenal Warna & Objek</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Padankan warna buah, bunga & kenderaan harian.</p>
+            </div>
+          </div>
+
+          <!-- EMOSI & PERASAAN -->
+          <div onclick="startCategory('emosi')" class="bg-white rounded-3xl p-5 shadow-md hover:shadow-xl border-4 border-amber-100 hover:border-amber-400 cursor-pointer transition transform hover:-translate-y-1 flex items-center gap-4 btn-bounce">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+              😊
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-lg text-slate-800">Kenal Emosi Wajah</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Belajar senyum, sedih, marah dan gembira.</p>
+            </div>
+          </div>
+
+          <!-- BENTUK ASAS -->
+          <div onclick="startCategory('bentuk')" class="bg-white rounded-3xl p-5 shadow-md hover:shadow-xl border-4 border-sky-100 hover:border-sky-400 cursor-pointer transition transform hover:-translate-y-1 flex items-center gap-4 btn-bounce">
+            <div class="w-16 h-16 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+              ⭐
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-lg text-slate-800">Bentuk Asas</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Bulat, segi empat, segi tiga dan bintang.</p>
+            </div>
+          </div>
+
+          <!-- NOMBOR 1 - 5 -->
+          <div onclick="startCategory('nombor')" class="bg-white rounded-3xl p-5 shadow-md hover:shadow-xl border-4 border-emerald-100 hover:border-emerald-400 cursor-pointer transition transform hover:-translate-y-1 flex items-center gap-4 btn-bounce">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+              🔢
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-lg text-slate-800">Kira 1 hingga 5</h4>
+              <p class="text-xs text-slate-500 mt-0.5">Kira bilangan objek haiwan & mainan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: GAMEPLAY -->
+    <section id="gameScreen" class="hidden space-y-4">
+      <!-- DASHBOARD STATUS -->
+      <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-100 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl font-bold shadow-inner">
+            ⭐
+          </div>
+          <div>
+            <span class="text-xs text-slate-400 font-bold uppercase">Bintang Kumpul</span>
+            <div id="starScore" class="font-heading text-2xl font-bold text-amber-600">0</div>
+          </div>
+        </div>
+
+        <div id="categoryBadge" class="bg-pink-50 text-pink-700 text-xs font-bold px-4 py-2 rounded-2xl border border-pink-200 uppercase">
+          Warna & Objek
+        </div>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="w-full bg-slate-200 h-4 rounded-full overflow-hidden p-0.5">
+        <div id="progressBar" class="bg-gradient-to-r from-amber-400 to-pink-400 h-full w-0 rounded-full transition-all duration-300"></div>
+      </div>
+
+      <!-- KAD SOALAN UTAMA (VISUAL BESAR) -->
+      <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-slate-100 space-y-6 text-center">
+        <!-- MASCOT DIALOGUE -->
+        <div class="flex items-center justify-center gap-3 bg-amber-50 p-4 rounded-2xl border border-amber-200 max-w-lg mx-auto">
+          <div class="text-4xl animate-float">🐻</div>
+          <div>
+            <p id="bearSpeech" class="text-sm md:text-base text-amber-900 font-bold">
+              "Cari objek yang manakah warna merah?"
+            </p>
+          </div>
+        </div>
+
+        <!-- GAMBAR / VISUAL UTAMA SOALAN -->
+        <div id="visualPrompt" class="text-6xl md:text-7xl py-4">
+          🍎
+        </div>
+
+        <!-- PILIHAN JAWAPAN (GRID BESAR & MESRA SENSOR) -->
+        <div id="optionsContainer" class="grid grid-cols-2 gap-4 max-w-md mx-auto">
+          <!-- Dijana secara dinamik -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: KEPUTUSAN / TAHniah -->
+    <section id="resultScreen" class="hidden space-y-6 text-center">
+      <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-4 border-amber-200 space-y-6 relative overflow-hidden">
+        <div class="w-24 h-24 bg-amber-400 text-white rounded-full flex items-center justify-center text-5xl mx-auto shadow-lg border-4 border-white animate-float">
+          🏆
+        </div>
+
+        <div>
+          <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Misi Selesai</span>
+          <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-800 mt-1">HEBAT SEKALI!</h2>
+          <p class="text-sm md:text-base text-slate-500 mt-1">Anak anda telah berjaya menyelesaikan latihan dengan ceria.</p>
+        </div>
+
+        <div class="bg-amber-50 p-6 rounded-3xl border border-amber-200 max-w-sm mx-auto">
+          <span class="text-xs text-slate-400 font-bold block uppercase">Jumlah Bintang Dikumpul</span>
+          <span id="finalStars" class="font-heading text-4xl font-bold text-amber-600">5 ⭐</span>
+        </div>
+
+        <div class="flex gap-3 justify-center pt-2">
+          <button onclick="goHome()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-4 rounded-2xl transition btn-bounce text-base">
+            <i class="fas fa-redo mr-1"></i> Main Semula
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- DATABASE LATIHAN KHAS (USIA 6 TAHUN) ---
+    const questionDatabase = {
+      warna: [
+        { q: "Yang manakah warna MERAH? 🍎", visual: "🔴", options: [{text: "Epal Merah", icon: "🍎"}, {text: "Pisang Kuning", icon: "🍌"}], answer: 0, speech: "Cari buah epal yang berwarna merah!" },
+        { q: "Yang manakah warna KUNING? ☀️", visual: "🟡", options: [{text: "Daun Hijau", icon: "🍃"}, {text: "Bintang Kuning", icon: "⭐"}], answer: 1, speech: "Bintang bersinar warna kuning!" },
+        { q: "Yang manakah warna HIJAU? 🍃", visual: "🟢", options: [{text: "Tembikai Hijau", icon: "🍉"}, {text: "Oren Jingga", icon: "🍊"}], answer: 0, speech: "Tembikai isi merah kulit luar warna hijau." },
+        { q: "Yang manakah warna BIRU? 🌊", visual: "🔵", options: [{text: "Belon Biru", icon: "🎈"}, {text: "Strawberi Merah", icon: "🍓"}], answer: 0, speech: "Belon ceria berwarna biru!" }
+      ],
+      emosi: [
+        { q: "Yang manakah muka GEMBIRA? 😊", visual: "😊", options: [{text: "Senyum", icon: "😄"}, {text: "Sedih", icon: "😢"}], answer: 0, speech: "Wah, muka yang ceria dan senyum!" },
+        { q: "Yang manakah muka SEDIH? 😢", visual: "😢", options: [{text: "Ketawa", icon: "😁"}, {text: "Menangis", icon: "💧"}], optionIcons: ["😁", "💧"], answer: 1, speech: "Kecil hati atau sedih, air mata keluar." },
+        { q: "Yang manakah muka PENAT / MENGantuk? 😴", visual: "😴", options: [{text: "Tidur", icon: "💤"}, {text: "Terkejut", icon: "😲"}], answer: 0, speech: "Sudah lewat malam, masanya untuk tidur." },
+        { q: "Yang manakah muka MARAH? 😠", visual: "😠", options: [{text: "Marah", icon: "💢"}, {text: "Senyum", icon: "😊"}], answer: 0, speech: "Muka cemberut tanda marah." }
+      ],
+      bentuk: [
+        { q: "Cari bentuk BULAT ⚽", visual: "⚪", options: [{text: "Bola Bulat", icon: "⚽"}, {text: "Kotak Kotak", icon: "📦"}], answer: 0, speech: "Bola bentuknya bulat!" },
+        { q: "Cari bentuk SEGI TIGA 🔺", visual: "🔺", options: [{text: "Piza Potong", icon: "🍕"}, {text: "Pintu Petak", icon: "🚪"}], answer: 0, speech: "Potongan piza bentuk segi tiga!" },
+        { q: "Cari bentuk BINTANG ⭐", visual: "⭐", options: [{text: "Bintang Laut", icon: "⭐"}, {text: "Cawan Air", icon: "☕"}], answer: 0, speech: "Bintang bersinar di langit." },
+        { q: "Cari bentuk HATI ❤️", visual: "❤️", options: [{text: "Belon Hati", icon: "💖"}, {text: "Pensel Panjang", icon: "✏️"}], answer: 0, speech: "Bentuk hati tanda sayang." }
+      ],
+      nombor: [
+        { q: "Kira bilangan kucing: 🐈 🐈", visual: "🐈 🐈", options: [{text: "Dua (2)", icon: "2️⃣"}, {text: "Empat (4)", icon: "4️⃣"}], answer: 0, speech: "Ada dua ekor kucing comel." },
+        { q: "Kira bilangan gula-gula: 🍬 🍬 🍬", visual: "🍬 🍬 🍬", options: [{text: "Satu (1)", icon: "1️⃣"}, {text: "Tiga (3)", icon: "3️⃣"}], answer: 1, speech: "Wah, ada tiga biji gula-gula manis." },
+        { q: "Kira bilangan bunga: 🌸", visual: "🌸", options: [{text: "Satu (1)", icon: "1️⃣"}, {text: "Lima (5)", icon: "5️⃣"}], answer: 0, speech: "Hanya ada satu kuntum bunga." },
+        { q: "Kira bilangan bintang: ⭐ ⭐ ⭐ ⭐ ⭐", visual: "⭐ ⭐ ⭐ ⭐ ⭐", options: [{text: "Lima (5)", icon: "5️⃣"}, {text: "Dua (2)", icon: "2️⃣"}], answer: 0, speech: "Hebat! Cukup lima bintang bersinar." }
+      ]
+    };
+
+    // --- STATE ---
+    let currentCategory = '';
+    let activeQuestions = [];
+    let currentIndex = 0;
+    let starScore = 0;
+    let isSoundOn = true;
+
+    // --- AUDIO SYSTEM (WEB AUDIO API) ---
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playSound(type) {
+      if (!isSoundOn) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'correct') {
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.5);
+      } else if (type === 'gentle') {
+        // Nada lembut untuk ralat/salah supaya anak tidak takut
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(330, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else if (type === 'win') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.2);
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      }
+    }
+
+    function toggleSound() {
+      isSoundOn = !isSoundOn;
+      const btn = document.getElementById('soundToggle');
+      btn.innerHTML = isSoundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute text-slate-400"></i>';
+    }
+
+    // --- NAVIGATION ---
+    function goHome() {
+      document.getElementById('homeScreen').classList.remove('hidden');
+      document.getElementById('gameScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.add('hidden');
+      currentCategory = '';
+    }
+
+    function startCategory(catKey) {
+      currentCategory = catKey;
+      currentIndex = 0;
+      starScore = 0;
+      activeQuestions = [...questionDatabase[catKey]].sort(() => Math.random() - 0.5);
+
+      document.getElementById('homeScreen').classList.add('hidden');
+      document.getElementById('gameScreen').classList.remove('hidden');
+      document.getElementById('resultScreen').classList.add('hidden');
+
+      const titles = {
+        warna: 'Warna & Objek',
+        emosi: 'Emosi Wajah',
+        bentuk: 'Bentuk Asas',
+        nombor: 'Kira 1 - 5'
+      };
+      document.getElementById('categoryBadge').innerText = titles[catKey];
+
+      updateHUD();
+      renderQuestion();
+    }
+
+    function updateHUD() {
+      document.getElementById('starScore').innerText = starScore;
+      document.getElementById('progressBar').style.width = `${(currentIndex / activeQuestions.length) * 100}%`;
+    }
+
+    function renderQuestion() {
+      if (currentIndex >= activeQuestions.length) {
+        endGame();
+        return;
+      }
+
+      const q = activeQuestions[currentIndex];
+      document.getElementById('bearSpeech').innerText = `"${q.speech}"`;
+      document.getElementById('visualPrompt').innerText = q.visual;
+
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "bg-white hover:bg-amber-50 border-4 border-slate-100 hover:border-amber-300 p-5 rounded-3xl text-center font-bold text-slate-700 transition flex flex-col items-center justify-center gap-2 shadow-sm btn-bounce";
+        btn.innerHTML = `
+          <span class="text-4xl md:text-5xl">${opt.icon}</span>
+          <span class="text-sm md:text-base text-slate-700 font-heading">${opt.text}</span>
+        `;
+        btn.onclick = () => checkAnswer(idx, btn);
+        optionsContainer.appendChild(btn);
+      });
+
+      updateHUD();
+    }
+
+    function checkAnswer(selectedIndex, btnElement) {
+      const q = activeQuestions[currentIndex];
+      const allBtns = document.getElementById('optionsContainer').children;
+
+      for (let btn of allBtns) {
+        btn.disabled = true;
+      }
+
+      if (selectedIndex === q.answer) {
+        playSound('correct');
+        btnElement.className = "bg-emerald-100 border-4 border-emerald-400 p-5 rounded-3xl text-center font-bold text-emerald-800 flex flex-col items-center justify-center gap-2 shadow-md";
+        
+        starScore += 1;
+        updateHUD();
+        document.getElementById('bearSpeech').innerText = '"Pandai sekali! Wah, hebat! ⭐"';
+
+        setTimeout(() => {
+          currentIndex++;
+          renderQuestion();
+        }, 1300);
+
+      } else {
+        playSound('gentle');
+        btnElement.className = "bg-pink-50 border-4 border-pink-300 p-5 rounded-3xl text-center font-bold text-pink-800 flex flex-col items-center justify-center gap-2";
+        
+        // Tunjuk jawapan betul secara lembut tanpa denda
+        allBtns[q.answer].className = "bg-emerald-50 border-4 border-emerald-300 p-5 rounded-3xl text-center font-bold text-emerald-800 flex flex-col items-center justify-center gap-2";
+        document.getElementById('bearSpeech').innerText = '"Cuba tengok yang ini pula ya, sayang! 🐻"';
+
+        setTimeout(() => {
+          currentIndex++;
+          renderQuestion();
+        }, 1800);
+      }
+    }
+
+    function endGame() {
+      playSound('win');
+      document.getElementById('gameScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.remove('hidden');
+
+      document.getElementById('finalStars').innerText = `${starScore} ⭐`;
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+    }
+  </script>
+</body>
+</html>
